@@ -3,8 +3,8 @@ package com.pc.numDistinct;
 public class NumDistinct {
 
     public static void main(String[] args) {
-        String a = "ACE";
-        String b = "ABCDE";
+        String a = "ABCDE";
+        String b = "ACE";
 
         int i = numDistinct(a, b);
 
