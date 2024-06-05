@@ -1,19 +1,28 @@
 package com.pc.bs;
 
-import java.util.Arrays;
 import java.util.Random;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        int[] array = randomArray(300);
-        Arrays.sort(array);
-        int key = 10_001;
+        int[] array = {9, 3, 4, 2, 5};
 
-        System.out.println("Searched " + key);
-        System.out.println("BinarySearch  " + binarySearch(array, key));
-        System.out.println("Arrays.binarySearch " + Arrays.binarySearch(array, key));
+        quickSort(array, 0, array.length - 1);
+        System.out.println(isSorted(array));
+
+    }
+
+    private static boolean isSorted(int[] array) {
+        int prev = array[0];
+        for (int i = 1; i < array.length; ++i) {
+            if (array[i] < prev) {
+                return false;
+            }
+            prev = array[i];
+        }
+
+        return true;
     }
 
     private static int binarySearch(int[] array, int key) {
@@ -46,4 +55,31 @@ public class Main {
         return array;
     }
 
+
+    private static void quickSort(int[] array, int l, int r) {
+        if (l < r) {
+            int pivot = pivot(array, l, r);
+            quickSort(array, pivot + 1, r);
+            quickSort(array, l, pivot - 1);
+        }
+    }
+
+    private static int pivot(int[] array, int l, int r) {
+        int pivot = array[r];
+        int i = l - 1;
+        for (int j = l; j <= r; ++j) {
+            if (array[j] < pivot) {
+                ++i;
+                swap(array, i, j);
+            }
+        }
+        swap(array, i + 1, r);
+        return i + 1;
+    }
+
+    private static void swap(int[] array, int i, int j) {
+        int temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
 }
